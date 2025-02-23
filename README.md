@@ -1,5 +1,4 @@
 # Sanber64-Cypress-Kelompok3
-<<<<<<< HEAD
 List Tugas Fitur :
 Create an Account (Raeza Nabla Rahmawati)
 Login (Nuranika Ramadhanti A S)
