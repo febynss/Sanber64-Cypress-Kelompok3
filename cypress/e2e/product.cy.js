@@ -3,6 +3,7 @@ describe('Choose Product', () => {
     cy.visit('https://magento.softwaretestingboard.com/')
     cy.get('a').click()
 })
+//success
 
   it('Success Login', () => {
       cy.get('#email').type('sibunavi@cyclelove.cc')
