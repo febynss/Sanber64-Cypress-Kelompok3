@@ -6,8 +6,8 @@ describe('Process to checkout', () => {
     cy.get('#email').type('sibunavi@cyclelove.cc')
     cy.get('#pass').type('Demo1234')
     cy.get('#send2').click()
-    cy.wait(5000)
-    cy.get('.minicart-wrapper').click()
+    cy.wait(1000)
+    cy.get('.minicart-wrapper', { waitForAnimations: false }).click();
     cy.get('#top-cart-btn-checkout').first().click()
     cy.get('[data-role="opc-continue"]').click();
     cy.get('[role="alert"]').should('contain', 'The shipping method is missing. Select the shipping method and try again.')
@@ -23,7 +23,9 @@ describe('Process to checkout', () => {
     cy.wait(1000)
     cy.get('.minicart-wrapper').click()
     cy.get('#top-cart-btn-checkout').first().click()
-    cy.get('input[name="shippingAddress.street.0"]').should('be.visible').clear().type('Surabaya');
+    cy.get('input[name="shippingAddress.street.0"]').click({force:true}) 
+    cy.get('input[name="shippingAddress.street.0"]').should('be.visible').clear()
+    cy.get('input[name="shippingAddress.street.0"]').type('Surabaya')
     cy.get('[data-role="opc-continue"]').click();
   });
 
@@ -34,14 +36,16 @@ describe('Process to checkout', () => {
     cy.get('#email').type('sibunavi@cyclelove.cc')
     cy.get('#pass').type('Demo1234')
     cy.get('#send2').click()
-    cy.wait(5000)
+    cy.wait(1000)
     cy.get('.minicart-wrapper').click()
     cy.get('#top-cart-btn-checkout').first().click()
-    cy.get('input[name="firstname"]').should('be.visible').clear();
-    cy.get('[class="field-error"]').should('This is a required field.')
-  });
+    cy.get('input[name="firstname"]').click({force:true}) 
+    cy.get('input[name="firstname"]').should('be.visible').clear()
+    cy.get('[class="field-error"]')
+    .invoke('text')
+    .then((text) => {
+      expect(text.trim()).to.eq('This is a required field.');
+    });
+    });
 
-  it('Checkout when not logged in to your account', () =>{
-
-  })
 });
